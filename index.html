@@ -18,76 +18,38 @@
               <button id="search-button" type="button" class="btn btn-primary">Search</button>
           </div>
       </div>
-  </form>
+   </form>
 
  
- 
+ <div id="flex-box"></div>
 
-   <div class="card-deck m-lg-3">
-     
-      <div class="card m-lg-3m  p-lg-3">
-        <img id="meal-image" class="card-img-top" src="">
-         <div class="card-footer">
-          <small  id="meal-name" class="text-center">Meal name</small>
-        </div>
-      </div>
-
-      <div class="card m-lg-3m  p-lg-3">
-         <img class="card-img-top" src="https:\/\/www.themealdb.com\/images\/media\/meals\/1548772327.jpg" alt="Card image cap">
-          <div class="card-footer">
-           <small class="text-center">Last updated 3 mins ago</small>
-         </div>
-       </div> 
-
-
-      <div class="card m-lg-3m  p-lg-3">
-        <img class="card-img-top" src="https:\/\/www.themealdb.com\/images\/media\/meals\/1548772327.jpg" alt="Card image cap">
-         <div class="card-footer">
-          <small class="text-center">Last updated 3 mins ago</small>
-        </div>
-      </div>
-      
-    </div>
+  
 
 <script>
+   document.getElementById('search-button').addEventListener('click',function(){
 
- document.getElementById('search-button').addEventListener('click',function(){
-   //  console.log('i love you')
-   const inputMeal=document.getElementById('input-meal').value
-   const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${inputMeal}`
-   console.log(url);
-
+const inputMeal=document.getElementById('input-meal').value
+const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${inputMeal}`
    fetch(url)
    .then(res  => res.json())
    .then(data => {
-      const mealArray =data.meals
-      //const mealElement = x =>x.strMeals
-      //const mealName = filter.mealArray(x=>x[x] )
-      console.log(mealArray);
-      for (let index = 0; index < mealArray.length; index++) {
-         const element = mealArray[index];         
-        console.log(element);
-       // const mealName=filter(element => {element.strMeal,element.strMealThumb})
-        
-       const mealName=element.strMeal 
-        const mealImage=element.strMealThumb
-        
-       // console.log(mealName);
-       console.log(mealImage);
-        document.getElementById('meal-name').innerText=mealName
-        document.getElementById('meal-image').src=mealImage
-      }
-   })
-
-
-
-
- })
-
-
-</script>
-
-
-
+      const mealArray =data.meals           
+      mealArray.forEach(element => {                
+      const containerElement=
+               `
+            <div class="card-deck m-lg-3">     
+                <div class="card m-lg-3m  p-lg-3">
+                   <img id="meal-image" class="card-img-top" src=${element.strMealThumb}>
+                <div class="card-footer">
+                   <small  id="meal-name" class="text-center">${element.strMeal}</small>
+                </div>
+            </div>         
+            `
+         document.getElementById('flex-box').innerHTML=containerElement;    
+         })   
+      }) 
+})
+   </script> 
+      
 </body>
 </html>
