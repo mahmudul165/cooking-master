@@ -18,38 +18,13 @@
               <button id="search-button" type="button" class="btn btn-primary">Search</button>
           </div>
       </div>
-   </form>
+   </form> 
 
- 
- <div id="flex-box"></div>
-
+<div class="flex-box" id="flex-box" ></div> 
+<div class="flex-box" id="product"></div>
   
 
-<script>
-   document.getElementById('search-button').addEventListener('click',function(){
-
-const inputMeal=document.getElementById('input-meal').value
-const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${inputMeal}`
-   fetch(url)
-   .then(res  => res.json())
-   .then(data => {
-      const mealArray =data.meals           
-      mealArray.forEach(element => {                
-      const containerElement=
-               `
-            <div class="card-deck m-lg-3">     
-                <div class="card m-lg-3m  p-lg-3">
-                   <img id="meal-image" class="card-img-top" src=${element.strMealThumb}>
-                <div class="card-footer">
-                   <small  id="meal-name" class="text-center">${element.strMeal}</small>
-                </div>
-            </div>         
-            `
-         document.getElementById('flex-box').innerHTML=containerElement;    
-         })   
-      }) 
-})
-   </script> 
+<script src="app.js"> </script> 
       
 </body>
 </html>
